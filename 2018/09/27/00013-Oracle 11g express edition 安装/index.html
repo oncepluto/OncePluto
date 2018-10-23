@@ -1,0 +1,656 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh_CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  
+    <title>Ubuntu 18.04 LTS (Desktop) 安装Oracle 11g express edition | OncePluto Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="OncePluto">
+    
+
+    
+    <meta name="description" content="Ubuntu 18.04 LTS (Desktop) 安装 Oracle 免费版数据库（Oracle 11g Express Edition）">
+<meta name="keywords" content="Linux,Ubuntu 18.04 LTS,Oracle 11g express edition">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu 18.04 LTS (Desktop) 安装Oracle 11g express edition">
+<meta property="og:url" content="http://yoursite.com/2018/09/27/00013-Oracle 11g express edition 安装/index.html">
+<meta property="og:site_name" content="OncePluto Blog">
+<meta property="og:description" content="Ubuntu 18.04 LTS (Desktop) 安装 Oracle 免费版数据库（Oracle 11g Express Edition）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:updated_time" content="2018-10-23T13:21:19.004Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ubuntu 18.04 LTS (Desktop) 安装Oracle 11g express edition">
+<meta name="twitter:description" content="Ubuntu 18.04 LTS (Desktop) 安装 Oracle 免费版数据库（Oracle 11g Express Edition）">
+
+    
+    <link rel="alternative" href="/atom.xml" title="OncePluto Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/avicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/OP.bmp" alt="OncePluto Blog" title="OncePluto Blog"></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="OncePluto Blog">OncePluto Blog</a></h1>
+				<h2 class="blog-motto">OncePluto 的博客，记录Java学习点点滴滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search">
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</ul></nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/09/27/00013-Oracle 11g express edition 安装/" title="Ubuntu 18.04 LTS (Desktop) 安装Oracle 11g express edition" itemprop="url">Ubuntu 18.04 LTS (Desktop) 安装Oracle 11g express edition</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="OncePluto" target="_blank" itemprop="author">OncePluto</a>
+		
+  </p><p class="article-time">
+    <time datetime="2018-09-27T12:23:07.000Z" itemprop="datePublished"> Published 2018-09-27</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Oracle-11g-Express-Edition-介绍"><span class="toc-number">1.</span> <span class="toc-text">一、Oracle 11g Express Edition 介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、Oracle-11g-Express-Edition-安装"><span class="toc-number">2.</span> <span class="toc-text">二、Oracle 11g Express Edition 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、执行以下命令，安装alien，用于将rpm转为deb"><span class="toc-number">2.1.</span> <span class="toc-text">1、执行以下命令，安装alien，用于将rpm转为deb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、从Oracle官网下载-Oracle-11g-express-edition-安装文件"><span class="toc-number">2.2.</span> <span class="toc-text">2、从Oracle官网下载 Oracle 11g express edition 安装文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、将rpm安装文件转为deb文件"><span class="toc-number">2.3.</span> <span class="toc-text">3、将rpm安装文件转为deb文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、准备工作"><span class="toc-number">2.4.</span> <span class="toc-text">4、准备工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、执行以下命令，以防Oracle安装过程中报错"><span class="toc-number">2.5.</span> <span class="toc-text">5、执行以下命令，以防Oracle安装过程中报错</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、重启计算机"><span class="toc-number">2.6.</span> <span class="toc-text">6、重启计算机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、安装-Oracle-11gR2-XE"><span class="toc-number">2.7.</span> <span class="toc-text">7、安装 Oracle 11gR2 XE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、Oracle-11gR2-XE-使用前必要配置"><span class="toc-number">2.8.</span> <span class="toc-text">8、Oracle 11gR2 XE 使用前必要配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9、重启计算机，Oracle应该正常运行"><span class="toc-number">2.9.</span> <span class="toc-text">9、重启计算机，Oracle应该正常运行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10、运行以下命令，进入SQL提示窗"><span class="toc-number">2.10.</span> <span class="toc-text">10、运行以下命令，进入SQL提示窗</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、原教程地址"><span class="toc-number">3.</span> <span class="toc-text">三、原教程地址</span></a></li></ol>
+		
+		</div>
+		
+		<p>Ubuntu 18.04 LTS (Desktop) 安装 Oracle 免费版数据库（Oracle 11g Express Edition）</p>
+<a id="more"></a>
+<h2 id="一、Oracle-11g-Express-Edition-介绍"><a href="#一、Oracle-11g-Express-Edition-介绍" class="headerlink" title="一、Oracle 11g Express Edition 介绍"></a>一、Oracle 11g Express Edition 介绍</h2><p>Oracle Database 11g Express Edition是 Oracle 数据库的免费版本，支持标准版的大部分功能<br>做为免费的 Oracle 数据库版本，Express Edition的限制是：</p>
+<ul>
+<li>1）最大数据库大小为 11 GB</li>
+<li>2）可使用的最大内存是 1G</li>
+<li>3）一台机器上只能安装一个 XE 实例</li>
+<li>4）Express Edition只能使用单 CPU，无法在多CPU上进行分布处理</li>
+</ul>
+<h2 id="二、Oracle-11g-Express-Edition-安装"><a href="#二、Oracle-11g-Express-Edition-安装" class="headerlink" title="二、Oracle 11g Express Edition 安装"></a>二、Oracle 11g Express Edition 安装</h2><h3 id="1、执行以下命令，安装alien，用于将rpm转为deb"><a href="#1、执行以下命令，安装alien，用于将rpm转为deb" class="headerlink" title="1、执行以下命令，安装alien，用于将rpm转为deb"></a>1、执行以下命令，安装alien，用于将rpm转为deb</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install alien libaio1 unixodbc vim</span><br></pre></td></tr></table></figure>
+<h3 id="2、从Oracle官网下载-Oracle-11g-express-edition-安装文件"><a href="#2、从Oracle官网下载-Oracle-11g-express-edition-安装文件" class="headerlink" title="2、从Oracle官网下载 Oracle 11g express edition 安装文件"></a>2、从Oracle官网下载 Oracle 11g express edition 安装文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html</span><br></pre></td></tr></table></figure>
+<h3 id="3、将rpm安装文件转为deb文件"><a href="#3、将rpm安装文件转为deb文件" class="headerlink" title="3、将rpm安装文件转为deb文件"></a>3、将rpm安装文件转为deb文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo alien --scripts -d oracle-xe-11.2.0-1.0.x86_64.rpm</span><br></pre></td></tr></table></figure>
+<h3 id="4、准备工作"><a href="#4、准备工作" class="headerlink" title="4、准备工作"></a>4、准备工作</h3><ul>
+<li>创建chkconfig脚本文件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /sbin/chkconfig</span><br></pre></td></tr></table></figure>
+<ul>
+<li>将如下内容粘贴到脚本文件中</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">file=/etc/init.d/oracle-xe</span><br><span class="line">if [[ ! `tail -n1 $file | grep INIT` ]]; then</span><br><span class="line">echo &gt;&gt; $file</span><br><span class="line">echo &apos;### BEGIN INIT INFO&apos; &gt;&gt; $file</span><br><span class="line">echo &apos;# Provides: OracleXE&apos; &gt;&gt; $file</span><br><span class="line">echo &apos;# Required-Start: $remote_fs $syslog&apos; &gt;&gt; $file</span><br><span class="line">echo &apos;# Required-Stop: $remote_fs $syslog&apos; &gt;&gt; $file</span><br><span class="line">echo &apos;# Default-Start: 2 3 4 5&apos; &gt;&gt; $file</span><br><span class="line">echo &apos;# Default-Stop: 0 1 6&apos; &gt;&gt; $file</span><br><span class="line">echo &apos;# Short-Description: Oracle 11g Express Edition&apos; &gt;&gt; $file</span><br><span class="line">echo &apos;### END INIT INFO&apos; &gt;&gt; $file</span><br><span class="line">fi</span><br><span class="line">update-rc.d oracle-xe defaults 80 01</span><br></pre></td></tr></table></figure>
+<ul>
+<li>保存以上文件并修改权限</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod 755 /sbin/chkconfig</span><br></pre></td></tr></table></figure>
+<ul>
+<li>执行以下命令</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">free -m</span><br><span class="line">sudo ln -s /usr/bin/awk /bin/awk</span><br><span class="line">mkdir /var/lock/subsys</span><br><span class="line">touch /var/lock/subsys/listener</span><br></pre></td></tr></table></figure>
+<h3 id="5、执行以下命令，以防Oracle安装过程中报错"><a href="#5、执行以下命令，以防Oracle安装过程中报错" class="headerlink" title="5、执行以下命令，以防Oracle安装过程中报错"></a>5、执行以下命令，以防Oracle安装过程中报错</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo -s</span><br><span class="line">umount /dev/shm</span><br><span class="line">sudo rm -rf /dev/shm</span><br><span class="line">sudo mkdir /dev/shm</span><br><span class="line">mount --move /run/shm /dev/shm</span><br><span class="line">sudo mount -t tmpfs shmfs -o size=2048m /dev/shm</span><br></pre></td></tr></table></figure>
+<p>(忽视执行过程中的报错)</p>
+<ul>
+<li>创建以下文件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/rc2.d/S01shm_load</span><br></pre></td></tr></table></figure>
+<ul>
+<li>复制以下内容到上面新建文件中</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$1</span>"</span> <span class="keyword">in</span></span><br><span class="line">start) mkdir /var/lock/subsys 2&gt;/dev/null</span><br><span class="line">touch /var/lock/subsys/listener</span><br><span class="line">rm /dev/shm 2&gt;/dev/null</span><br><span class="line">mkdir /dev/shm 2&gt;/dev/null</span><br><span class="line">mount -t tmpfs shmfs -o size=2048m /dev/shm ;;</span><br><span class="line">*) <span class="built_in">echo</span> error</span><br><span class="line"><span class="built_in">exit</span> 1 ;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>执行以下命令</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod 755 /etc/rc2.d/S01shm_load</span><br></pre></td></tr></table></figure>
+<h3 id="6、重启计算机"><a href="#6、重启计算机" class="headerlink" title="6、重启计算机"></a>6、重启计算机</h3><h3 id="7、安装-Oracle-11gR2-XE"><a href="#7、安装-Oracle-11gR2-XE" class="headerlink" title="7、安装 Oracle 11gR2 XE"></a>7、安装 Oracle 11gR2 XE</h3><ul>
+<li><p>进入Oracle 11gR2 XE安装文件所在目录</p>
+</li>
+<li><p>运行安装包</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg --install oracle-xe-11.2.0-1.0.x86_64.deb</span><br></pre></td></tr></table></figure>
+<ul>
+<li>运行配置程序</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /etc/init.d/oracle-xe configure</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>输入以下配置信息</p>
+</li>
+<li><p>Valid HTTP port for the Oracle Application Express (the default is 8080, use 7070)</p>
+</li>
+<li>Valid port for the Oracle database listener (the default is 1521)</li>
+<li>Password for the SYS and SYSTEM administrative user accounts</li>
+<li>Confirm password for SYS and SYSTEM administrative user accounts</li>
+<li>Whether you want the database to start automatically when the computer starts, Y</li>
+</ul>
+<h3 id="8、Oracle-11gR2-XE-使用前必要配置"><a href="#8、Oracle-11gR2-XE-使用前必要配置" class="headerlink" title="8、Oracle 11gR2 XE 使用前必要配置"></a>8、Oracle 11gR2 XE 使用前必要配置</h3><ul>
+<li>环境变量配置</li>
+</ul>
+<p>进入用户目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br></pre></td></tr></table></figure>
+<p>编辑bashrc文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim .bashrc</span><br></pre></td></tr></table></figure>
+<p>将以下内容添加到 .bashrc文件尾</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe</span><br><span class="line">export ORACLE_SID=XE</span><br><span class="line">export NLS_LANG=`$ORACLE_HOME/bin/nls_lang.sh`</span><br><span class="line">export ORACLE_BASE=/u01/app/oracle</span><br><span class="line">export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH</span><br><span class="line">export PATH=$ORACLE_HOME/bin:$PATH</span><br></pre></td></tr></table></figure>
+<p>执行如下命令，当前bash环境变量生效</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./.profile</span><br></pre></td></tr></table></figure>
+<p>编辑root用户下配置文件，将相同内容复制到文件尾</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /root/.bashrc</span><br></pre></td></tr></table></figure>
+<h3 id="9、重启计算机，Oracle应该正常运行"><a href="#9、重启计算机，Oracle应该正常运行" class="headerlink" title="9、重启计算机，Oracle应该正常运行"></a>9、重启计算机，Oracle应该正常运行</h3><h3 id="10、运行以下命令，进入SQL提示窗"><a href="#10、运行以下命令，进入SQL提示窗" class="headerlink" title="10、运行以下命令，进入SQL提示窗"></a>10、运行以下命令，进入SQL提示窗</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlplus sys as sysdba</span><br></pre></td></tr></table></figure>
+<h2 id="三、原教程地址"><a href="#三、原教程地址" class="headerlink" title="三、原教程地址"></a>三、原教程地址</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.youtube.com/watch?v=jOrarHqj7X8</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原文如下</p>
+</blockquote>
+<p>This is Installation of Oracle 11g express edition on Ubuntu 18.04 LTS (Desktop)</p>
+<p><strong>Step</strong> 1 - Installation of SSH server (sudo apt install openssh-server)</p>
+<p>In this case, we use Cygwin terminal to run the required commands so installing the cygwin client - (ssh user@ipaddress)</p>
+<p>I have opened the ssh session on the Cygwin termina - This is how it looks like,</p>
+<p><strong>Step 2</strong> - Execute the following commands (pre-requisite packages)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install alien libaio1 unixodbc vim</span><br></pre></td></tr></table></figure>
+<p><strong>Step 3</strong> - Download the Oracle 11g express edition setup file from Oracle website</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html</span><br></pre></td></tr></table></figure>
+<p>In this case, we have downloaded the setup file (rpm) and converted it to debian type (deb)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo alien --scripts -d oracle-xe-11.2.0-1.0.x86_64.rpm</span><br></pre></td></tr></table></figure>
+<p>(I am copying the file into the linux box with Winscp client)</p>
+<p><strong>Step 4</strong> - Execute the pre-requisites,</p>
+<p>⦁ Create a special chkconfig script:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /sbin/chkconfig</span><br></pre></td></tr></table></figure>
+<p>(copy and paste the below content into the file )</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">file=/etc/init.d/oracle-xe</span><br><span class="line">if [[ ! `tail -n1 $file | grep INIT` ]]; then</span><br><span class="line">echo &gt;&gt; $file</span><br><span class="line">echo &apos;### BEGIN INIT INFO&apos; &gt;&gt; $file</span><br><span class="line">echo &apos;# Provides: OracleXE&apos; &gt;&gt; $file</span><br><span class="line">echo &apos;# Required-Start: $remote_fs $syslog&apos; &gt;&gt; $file</span><br><span class="line">echo &apos;# Required-Stop: $remote_fs $syslog&apos; &gt;&gt; $file</span><br><span class="line">echo &apos;# Default-Start: 2 3 4 5&apos; &gt;&gt; $file</span><br><span class="line">echo &apos;# Default-Stop: 0 1 6&apos; &gt;&gt; $file</span><br><span class="line">echo &apos;# Short-Description: Oracle 11g Express Edition&apos; &gt;&gt; $file</span><br><span class="line">echo &apos;### END INIT INFO&apos; &gt;&gt; $file</span><br><span class="line">fi</span><br><span class="line">update-rc.d oracle-xe defaults 80 01</span><br></pre></td></tr></table></figure>
+<p>Save the above file and provide appropriate permissions</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod 755 /sbin/chkconfig</span><br></pre></td></tr></table></figure>
+<p>⦁ Execute the following commands :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">free -m</span><br><span class="line">sudo ln -s /usr/bin/awk /bin/awk</span><br><span class="line">mkdir /var/lock/subsys</span><br><span class="line">touch /var/lock/subsys/listener</span><br></pre></td></tr></table></figure>
+<p><strong>Step 5</strong> - Execute the below which prevents oracle installation errors</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo -s</span><br><span class="line">umount /dev/shm</span><br><span class="line">sudo rm -rf /dev/shm</span><br><span class="line">sudo mkdir /dev/shm</span><br><span class="line">mount --move /run/shm /dev/shm</span><br><span class="line">sudo mount -t tmpfs shmfs -o size=2048m /dev/shm</span><br></pre></td></tr></table></figure>
+<p>(ignore the errors)</p>
+<p>Create the below file</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/rc2.d/S01shm_load</span><br></pre></td></tr></table></figure>
+<p>Copy the below content into the opened file</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">case &quot;$1&quot; in</span><br><span class="line">start) mkdir /var/lock/subsys 2&gt;/dev/null</span><br><span class="line">touch /var/lock/subsys/listener</span><br><span class="line">rm /dev/shm 2&gt;/dev/null</span><br><span class="line">mkdir /dev/shm 2&gt;/dev/null</span><br><span class="line">mount -t tmpfs shmfs -o size=2048m /dev/shm ;;</span><br><span class="line">*) echo error</span><br><span class="line">exit 1 ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+<p>Execute the following command</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod 755 /etc/rc2.d/S01shm_load</span><br></pre></td></tr></table></figure>
+<p><strong>Step 6</strong> - Restart the machine.</p>
+<p><strong>Step 7</strong> - Install Oracle 11gR2 XE.</p>
+<p>Go to the directory where you created the ubuntu package file and enter following commands (not as root user)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg --install oracle-xe_11.2.0-2_amd64.deb</span><br><span class="line">sudo /etc/init.d/oracle-xe configure</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>Enter the following configuration information:</p>
+</li>
+<li><p>Valid HTTP port for the Oracle Application Express (the default is 8080, use 7070)</p>
+</li>
+<li>Valid port for the Oracle database listener (the default is 1521)</li>
+<li>Password for the SYS and SYSTEM administrative user accounts</li>
+<li>Confirm password for SYS and SYSTEM administrative user accounts</li>
+<li>Whether you want the database to start automatically when the computer starts, Y</li>
+</ul>
+<p><strong>Step 8</strong> - Before you start using Oracle 11gR2 XE you have to set-up few things more</p>
+<ul>
+<li>Set-up the environmental variables,</li>
+<li>Change to users home directory (type cd)</li>
+<li>Open bashrc using the command</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim .bashrc</span><br></pre></td></tr></table></figure>
+<pre><code>Add following lines to .bashrc :
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe</span><br><span class="line">export ORACLE_SID=XE</span><br><span class="line">export NLS_LANG=`$ORACLE_HOME/bin/nls_lang.sh`</span><br><span class="line">export ORACLE_BASE=/u01/app/oracle</span><br><span class="line">export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH</span><br><span class="line">export PATH=$ORACLE_HOME/bin:$PATH</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Execute .profile to load the changes:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">. ./.profile</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">- Open root bash using **sudo vi /root/.bashrc** and copy the same contents at the end of that file</span><br><span class="line"></span><br><span class="line">**Step 9** - Restart the appliance. Oracle should have been started now</span><br><span class="line"></span><br><span class="line">**Step 10** - Execute the following command to enter SQL prompt</span><br></pre></td></tr></table></figure>
+<p>sqlplus sys as sysdba﻿<br><code>`</code></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/Ubuntu-18-04-LTS/">Ubuntu 18.04 LTS</a><a href="/tags/Oracle-11g-express-edition/">Oracle 11g express edition</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2018/09/27/00013-Oracle 11g express edition 安装/" data-title="Ubuntu 18.04 LTS (Desktop) 安装Oracle 11g express edition | OncePluto Blog" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev">
+ <a href="/2018/10/08/00015-Oracle导出数据/" title="Oracle 11g R2 导出数据">
+  <strong>上一篇：</strong><br>
+  <span>
+  Oracle 11g R2 导出数据</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2018/06/04/00012-安装配置raia2/" title="Ubuntu18 安装配置aria2">
+ <strong>下一篇：</strong><br> 
+ <span>Ubuntu18 安装配置aria2
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Oracle-11g-Express-Edition-介绍"><span class="toc-number">1.</span> <span class="toc-text">一、Oracle 11g Express Edition 介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、Oracle-11g-Express-Edition-安装"><span class="toc-number">2.</span> <span class="toc-text">二、Oracle 11g Express Edition 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、执行以下命令，安装alien，用于将rpm转为deb"><span class="toc-number">2.1.</span> <span class="toc-text">1、执行以下命令，安装alien，用于将rpm转为deb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、从Oracle官网下载-Oracle-11g-express-edition-安装文件"><span class="toc-number">2.2.</span> <span class="toc-text">2、从Oracle官网下载 Oracle 11g express edition 安装文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、将rpm安装文件转为deb文件"><span class="toc-number">2.3.</span> <span class="toc-text">3、将rpm安装文件转为deb文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、准备工作"><span class="toc-number">2.4.</span> <span class="toc-text">4、准备工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、执行以下命令，以防Oracle安装过程中报错"><span class="toc-number">2.5.</span> <span class="toc-text">5、执行以下命令，以防Oracle安装过程中报错</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、重启计算机"><span class="toc-number">2.6.</span> <span class="toc-text">6、重启计算机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、安装-Oracle-11gR2-XE"><span class="toc-number">2.7.</span> <span class="toc-text">7、安装 Oracle 11gR2 XE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、Oracle-11gR2-XE-使用前必要配置"><span class="toc-number">2.8.</span> <span class="toc-text">8、Oracle 11gR2 XE 使用前必要配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9、重启计算机，Oracle应该正常运行"><span class="toc-number">2.9.</span> <span class="toc-text">9、重启计算机，Oracle应该正常运行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10、运行以下命令，进入SQL提示窗"><span class="toc-number">2.10.</span> <span class="toc-text">10、运行以下命令，进入SQL提示窗</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、原教程地址"><span class="toc-number">3.</span> <span class="toc-text">三、原教程地址</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>14</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ubuntu-18-04-LTS/" title="Ubuntu 18.04 LTS">Ubuntu 18.04 LTS<sup>14</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Oracle-11g-R2/" title="Oracle 11g R2">Oracle 11g R2<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Root/" title="Root">Root<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/shutter/" title="shutter">shutter<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/WPS-Office/" title="WPS Office">WPS Office<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JDK-1-8/" title="JDK 1.8">JDK 1.8<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/表空间扩容/" title="表空间扩容">表空间扩容<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySql-8-0/" title="MySql 8.0">MySql 8.0<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/aria2/" title="aria2">aria2<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Baiduexporter/" title="Baiduexporter">Baiduexporter<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Oracle-11g-express-edition/" title="Oracle 11g express edition">Oracle 11g express edition<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Chrome/" title="Chrome">Chrome<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/exp/" title="exp">exp<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MySQL/" title="MySQL">MySQL<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Redis/" title="Redis">Redis<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://lpzhou.com" target="_blank" title="OncePluto Blog">OncePluto Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">Weibo</p>
+    <iframe width="100%" height="119" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+	
+	
+	<section class="info">
+		<p> OncePluto BLOG <br>
+			记录JAVA-WEB学习点滴</p>
+	</section>
+	 
+	<div class="social-font">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="OncePluto">OncePluto</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
